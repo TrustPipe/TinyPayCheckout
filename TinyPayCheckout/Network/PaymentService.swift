@@ -229,10 +229,10 @@ class PaymentService {
                             name: .transactionStatusChanged,
                             object: nil,
                             userInfo: [
-                                "status": "failed", 
-                                "hash": nil,
+                                "status": "failed",
+                                "hash": nil as Any?,
                                 "error_message": errorMessage,
-                                "error_details": errorDetails
+                                "error_details": errorDetails ?? ""
                             ]
                         )
                     }
@@ -260,10 +260,10 @@ class PaymentService {
                         name: .transactionStatusChanged,
                         object: nil,
                         userInfo: [
-                            "status": "failed", 
-                            "hash": nil,
+                            "status": "failed",
+                            "hash": nil as Any?,
                             "error_message": errorMessage,
-                            "error_details": errorDetails
+                            "error_details": errorDetails ?? ""
                         ]
                     )
                 }

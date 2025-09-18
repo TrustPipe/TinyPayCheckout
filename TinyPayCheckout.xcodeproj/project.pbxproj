@@ -29,9 +29,22 @@
 		F24CFA252E7BFF35006D9D61 /* TinyPayCheckoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyPayCheckoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F24CFA5A2E7C16F1006D9D61 /* Exceptions for "TinyPayCheckout" folder in "TinyPayCheckout" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F24CFA0D2E7BFF33006D9D61 /* TinyPayCheckout */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F24CFA102E7BFF33006D9D61 /* TinyPayCheckout */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F24CFA5A2E7C16F1006D9D61 /* Exceptions for "TinyPayCheckout" folder in "TinyPayCheckout" target */,
+			);
 			path = TinyPayCheckout;
 			sourceTree = "<group>";
 		};
@@ -400,6 +413,8 @@
 				DEVELOPMENT_TEAM = UD3269PSCB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TinyPayCheckout/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use for scan QR Code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +443,8 @@
 				DEVELOPMENT_TEAM = UD3269PSCB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TinyPayCheckout/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use for scan QR Code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

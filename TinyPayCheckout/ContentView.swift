@@ -57,7 +57,7 @@ struct ContentView: View {
                 TransactionStatusModal(isPresented: $showTransactionModal)
             }
         }
-        .onChange(of: scannedCode) { newValue in
+        .onChange(of: scannedCode) { oldValue, newValue in
             guard let raw = newValue else { return }
 
             guard let parsed = QRCodeParser.parseQRCode(raw) else {
