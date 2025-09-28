@@ -11,7 +11,7 @@ struct ContentView: View {
     @State private var scannedCode: String?
     @State private var presentScanner = false
     @State private var amount: String = ""
-    @State private var selectedCurrency: String = "APT"
+    @State private var selectedCurrency: String = ""
     @State private var presentAmountSetter = false
     @State private var showTransactionModal = false
     @State private var showQRFormatError = false
@@ -77,12 +77,14 @@ struct ContentView: View {
             )
             
             let payeeAddress = UserDefaults.standard.string(forKey: "receivingAddress") ?? ""
+            let selectedNetwork = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
             PaymentService.shared.createPaymentRequest(
                 payerAddress: parsed.addr,
-                opt: parsed.opt,
+                otp: parsed.otp,
                 payeeAddress: payeeAddress,
                 amount: amount.isEmpty ? "0" : amount,
-                currency: selectedCurrency
+                currency: selectedCurrency,
+                network: selectedNetwork
             )
         }
         .alert("Invalid QR Code Format", isPresented: $showQRFormatError) {
@@ -92,6 +94,28 @@ struct ContentView: View {
             }
         } message: {
             Text("The QR code format is incorrect.\n\n\(QRCodeParser.getQRCodeFormatDescription())")
+        }
+        .onAppear {
+            initializeCurrency()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
+            updateCurrencyForNetwork()
+        }
+    }
+    
+    private func initializeCurrency() {
+        if selectedCurrency.isEmpty {
+            let network = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
+            selectedCurrency = network == "aptos-testnet" ? "APT" : "ETH"
+        }
+    }
+    
+    private func updateCurrencyForNetwork() {
+        let network = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
+        let currencies = network == "aptos-testnet" ? ["APT", "USDT", "USDC"] : ["ETH", "USDT", "USDC"]
+        
+        if !currencies.contains(selectedCurrency) {
+            selectedCurrency = network == "aptos-testnet" ? "APT" : "ETH"
         }
     }
 }

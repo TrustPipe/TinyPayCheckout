@@ -5,7 +5,18 @@ struct AmountSetterView: View {
     @Binding var selectedCurrency: String
     @Binding var isPresented: Bool
     
-    let currencies = ["APT", "USDT", "USDC"]
+    @State private var selectedNetwork: String = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
+    
+    private var currencies: [String] {
+        switch selectedNetwork {
+        case "aptos-testnet":
+            return ["APT", "USDT", "USDC"]
+        case "eth-sepolia":
+            return ["ETH", "USDT", "USDC"]
+        default:
+            return ["ETH", "USDT", "USDC"]
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -43,6 +54,16 @@ struct AmountSetterView: View {
             }
             .padding()
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                updateCurrencySelection()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
+                let newNetwork = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
+                if newNetwork != selectedNetwork {
+                    selectedNetwork = newNetwork
+                    updateCurrencySelection()
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
@@ -56,6 +77,13 @@ struct AmountSetterView: View {
                     .disabled(amount.isEmpty)
                 }
             }
+        }
+    }
+    
+    private func updateCurrencySelection() {
+        let defaultCurrency = selectedNetwork == "aptos-testnet" ? "APT" : "ETH"
+        if !currencies.contains(selectedCurrency) {
+            selectedCurrency = defaultCurrency
         }
     }
 }

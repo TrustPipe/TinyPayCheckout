@@ -3,20 +3,22 @@ import SwiftUI
 struct SettingsTabView: View {
     @State private var receivingAddress: String = UserDefaults.standard.string(forKey: "receivingAddress") ?? ""
     @State private var newAddress: String = ""
+    @State private var selectedNetwork: String = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
     @State private var usePaymaster: Bool = true
     @State private var privateKey: String = ""
     @State private var kycText: String = "Enable KYC"
     @State private var showAddressFormatAlert: Bool = false
     
+    private let networks = ["eth-sepolia", "aptos-testnet"]
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // 当前收款地址显示区域
                 VStack(spacing: 12) {
                     Text("Current Receiving Address")
                         .font(.headline)
                         .foregroundColor(.secondary)
-                    
+
                     if receivingAddress.isEmpty {
                         Text("No Address Set")
                             .font(.title2)
@@ -40,8 +42,7 @@ struct SettingsTabView: View {
                 .padding(.vertical, 20)
                 .frame(maxWidth: .infinity)
                 .background(Color.blue.opacity(0.1))
-                
-                // 设置选项列表
+
                 Form {
                     Section(header: Text("Change Address")) {
                         TextField(AddressValidator.getAddressExample(), text: $newAddress)
@@ -50,14 +51,14 @@ struct SettingsTabView: View {
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                             .padding(.vertical, 4)
-                        
+
                         Button("Save") {
                             if !newAddress.isEmpty {
-                                // 验证地址格式
+                                // Check Address format
                                 if AddressValidator.isValidWalletAddress(newAddress) {
                                     receivingAddress = newAddress
                                     UserDefaults.standard.set(newAddress, forKey: "receivingAddress")
-                                    newAddress = "" // 清空输入框
+                                    newAddress = ""
                                 } else {
                                     showAddressFormatAlert = true
                                 }
@@ -67,6 +68,18 @@ struct SettingsTabView: View {
                         .foregroundColor(newAddress.isEmpty ? .secondary : .blue)
                         .padding(.vertical, 4)
                         .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    
+                    Section(header: Text("Network")) {
+                        Picker("Network", selection: $selectedNetwork) {
+                            ForEach(networks, id: \.self) { network in
+                                Text(network).tag(network)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .onChange(of: selectedNetwork) { _, newValue in
+                            UserDefaults.standard.set(newValue, forKey: "selectedNetwork")
+                        }
                     }
                     
                     Section(header: Text("Payment Settings")) {
@@ -96,7 +109,6 @@ struct SettingsTabView: View {
         }
         .alert("Invalid Address Format", isPresented: $showAddressFormatAlert) {
             Button("OK") {
-                // 清空输入框，让用户重新输入
                 newAddress = ""
             }
         } message: {

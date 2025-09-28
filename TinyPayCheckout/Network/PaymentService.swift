@@ -9,10 +9,11 @@ protocol PaymentServiceDelegate: AnyObject {
 
 struct PaymentRequest: Codable {
     let payer_addr: String
-    let opt: String
+    let otp: String
     let payee_addr: String
     let amount: Int
     let currency: String
+    let network: String
 }
 
 // 统一的API响应格式
@@ -42,7 +43,7 @@ class PaymentService {
     static let shared = PaymentService()
     
     // Base URL for the payment API - can be configured
-    private let baseURL = "https://xxxxx.xyz" // Replace with actual API URL
+    private let baseURL = "https://api-tinypay.predictplay.xyz" // Replace with actual API URL
     
     weak var delegate: PaymentServiceDelegate?
     
@@ -52,26 +53,28 @@ class PaymentService {
     private func getErrorMessage(for code: Int) -> String {
         switch code {
         case 2000:
-            return "金额必须大于0"
+            return "Bill must bigger than 0"
         case 2001:
-            return "金额超出限制"
+            return "Over limit"
         case 2002:
-            return "余额不足"
+            return "Unsufficient Blance"
         case 2003:
-            return "OPT 不正确"
+            return "OTP uncorrect"
         case 2004:
-            return "缺少必需字段"
+            return "Missing field"
         case 2005:
-            return "交易不存在"
+            return "TX not exist"
+        case 2006:
+            return "invalid token"
         default:
-            return "未知错误"
+            return "Unknow Error"
         }
     }
     
     // Get error details from response
     private func getErrorDetails(_ response: PaymentResponse) -> String? {
         if let missingFields = response.data?.missing_fields, !missingFields.isEmpty {
-            return "缺失字段: \(missingFields.joined(separator: ", "))"
+            return "Missing Field: \(missingFields.joined(separator: ", "))"
         }
         return nil
     }
@@ -79,18 +82,20 @@ class PaymentService {
     // Async function to create payment transaction
     func createPayment(
         payerAddress: String,
-        opt: String,
+        otp: String,
         payeeAddress: String,
         amount: String,
-        currency: String
+        currency: String,
+        network: String
     ) async throws -> PaymentResponse {
         
         let paymentRequest = PaymentRequest(
             payer_addr: payerAddress,
-            opt: opt,
+            otp: otp,
             payee_addr: payeeAddress,
             amount: Int(amount) ?? 0,
-            currency: currency
+            currency: currency,
+            network: network
         )
         
         guard let url = URL(string: "\(baseURL)/api/payments") else {
@@ -190,19 +195,21 @@ class PaymentService {
     // Legacy function for backward compatibility - creates payment and queries status with polling
     func createPaymentRequest(
         payerAddress: String,
-        opt: String,
+        otp: String,
         payeeAddress: String,
         amount: String,
-        currency: String
+        currency: String,
+        network: String
     ) {
         Task {
             do {
                 let response = try await createPayment(
                     payerAddress: payerAddress,
-                    opt: opt,
+                    otp: otp,
                     payeeAddress: payeeAddress,
                     amount: amount,
-                    currency: currency
+                    currency: currency,
+                    network: network
                 )
                 print("✅ Payment created successfully: \(response)")
                 

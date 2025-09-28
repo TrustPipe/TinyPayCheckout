@@ -3,9 +3,12 @@ import SwiftUI
 struct OnboardingView: View {
     @Binding var isOnboardingCompleted: Bool
     @State private var receivingAddress: String = ""
+    @State private var selectedNetwork: String = "eth-sepolia"
     @State private var showError: Bool = false
     @State private var isProcessing: Bool = false
     @State private var showAddressFormatAlert: Bool = false
+    
+    private let networks = ["eth-sepolia", "aptos-testnet"]
     
     var body: some View {
         ScrollView {
@@ -42,6 +45,23 @@ struct OnboardingView: View {
                             text: $receivingAddress,
                             showError: $showError
                         )
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Network")
+                            .font(.headline)
+                        
+                        Text("Select the blockchain network")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        Picker("Network", selection: $selectedNetwork) {
+                            ForEach(networks, id: \.self) { network in
+                                Text(network).tag(network)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     
                     if showError {
@@ -91,8 +111,9 @@ struct OnboardingView: View {
                 defer { isProcessing = false }
                 
                 if isValid {
-                    // 保存地址到本地存储
+                    // 保存地址和网络到本地存储
                     UserDefaults.standard.set(receivingAddress, forKey: "receivingAddress")
+                    UserDefaults.standard.set(selectedNetwork, forKey: "selectedNetwork")
                     UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
                     
                     withAnimation(.easeInOut(duration: 0.3)) {
