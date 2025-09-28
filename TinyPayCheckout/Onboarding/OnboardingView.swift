@@ -3,12 +3,10 @@ import SwiftUI
 struct OnboardingView: View {
     @Binding var isOnboardingCompleted: Bool
     @State private var receivingAddress: String = ""
-    @State private var selectedNetwork: String = "eth-sepolia"
+    @State private var selectedNetwork = NetworkConfig.NetworkType.ethSepolia
     @State private var showError: Bool = false
     @State private var isProcessing: Bool = false
     @State private var showAddressFormatAlert: Bool = false
-    
-    private let networks = ["eth-sepolia", "aptos-testnet"]
     
     var body: some View {
         ScrollView {
@@ -56,8 +54,8 @@ struct OnboardingView: View {
                             .foregroundColor(.secondary)
                         
                         Picker("Network", selection: $selectedNetwork) {
-                            ForEach(networks, id: \.self) { network in
-                                Text(network).tag(network)
+                            ForEach(NetworkConfig.allNetworks, id: \.self) { network in
+                                Text(network.displayName).tag(network)
                             }
                         }
                         .pickerStyle(MenuPickerStyle())
@@ -113,7 +111,7 @@ struct OnboardingView: View {
                 if isValid {
                     // 保存地址和网络到本地存储
                     UserDefaults.standard.set(receivingAddress, forKey: "receivingAddress")
-                    UserDefaults.standard.set(selectedNetwork, forKey: "selectedNetwork")
+                    NetworkConfig.setCurrentNetwork(selectedNetwork)
                     UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
                     
                     withAnimation(.easeInOut(duration: 0.3)) {

@@ -5,17 +5,10 @@ struct AmountSetterView: View {
     @Binding var selectedCurrency: String
     @Binding var isPresented: Bool
     
-    @State private var selectedNetwork: String = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
+    @State private var currentNetwork = NetworkConfig.currentNetwork
     
     private var currencies: [String] {
-        switch selectedNetwork {
-        case "aptos-testnet":
-            return ["APT", "USDT", "USDC"]
-        case "eth-sepolia":
-            return ["ETH", "USDT", "USDC"]
-        default:
-            return ["ETH", "USDT", "USDC"]
-        }
+        return NetworkConfig.currentSupportedCurrencies
     }
     
     var body: some View {
@@ -57,12 +50,9 @@ struct AmountSetterView: View {
             .onAppear {
                 updateCurrencySelection()
             }
-            .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
-                let newNetwork = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
-                if newNetwork != selectedNetwork {
-                    selectedNetwork = newNetwork
-                    updateCurrencySelection()
-                }
+            .onReceive(NotificationCenter.default.publisher(for: .networkChanged)) { _ in
+                currentNetwork = NetworkConfig.currentNetwork
+                updateCurrencySelection()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -81,9 +71,6 @@ struct AmountSetterView: View {
     }
     
     private func updateCurrencySelection() {
-        let defaultCurrency = selectedNetwork == "aptos-testnet" ? "APT" : "ETH"
-        if !currencies.contains(selectedCurrency) {
-            selectedCurrency = defaultCurrency
-        }
+        selectedCurrency = NetworkConfig.getValidCurrency(selectedCurrency)
     }
 }

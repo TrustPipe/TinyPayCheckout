@@ -77,14 +77,13 @@ struct ContentView: View {
             )
             
             let payeeAddress = UserDefaults.standard.string(forKey: "receivingAddress") ?? ""
-            let selectedNetwork = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
             PaymentService.shared.createPaymentRequest(
                 payerAddress: parsed.addr,
                 otp: parsed.otp,
                 payeeAddress: payeeAddress,
                 amount: amount.isEmpty ? "0" : amount,
                 currency: selectedCurrency,
-                network: selectedNetwork
+                network: NetworkConfig.currentNetwork.rawValue
             )
         }
         .alert("Invalid QR Code Format", isPresented: $showQRFormatError) {
@@ -98,25 +97,19 @@ struct ContentView: View {
         .onAppear {
             initializeCurrency()
         }
-        .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
+        .onReceive(NotificationCenter.default.publisher(for: .networkChanged)) { _ in
             updateCurrencyForNetwork()
         }
     }
     
     private func initializeCurrency() {
-        if selectedCurrency.isEmpty {
-            let network = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
-            selectedCurrency = network == "aptos-testnet" ? "APT" : "ETH"
+        if selectedCurrency.isEmpty || !NetworkConfig.isCurrencySupported(selectedCurrency) {
+            selectedCurrency = NetworkConfig.currentDefaultCurrency
         }
     }
     
     private func updateCurrencyForNetwork() {
-        let network = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
-        let currencies = network == "aptos-testnet" ? ["APT", "USDT", "USDC"] : ["ETH", "USDT", "USDC"]
-        
-        if !currencies.contains(selectedCurrency) {
-            selectedCurrency = network == "aptos-testnet" ? "APT" : "ETH"
-        }
+        selectedCurrency = NetworkConfig.getValidCurrency(selectedCurrency)
     }
 }
 

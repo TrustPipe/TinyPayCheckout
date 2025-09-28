@@ -3,13 +3,11 @@ import SwiftUI
 struct SettingsTabView: View {
     @State private var receivingAddress: String = UserDefaults.standard.string(forKey: "receivingAddress") ?? ""
     @State private var newAddress: String = ""
-    @State private var selectedNetwork: String = UserDefaults.standard.string(forKey: "selectedNetwork") ?? "eth-sepolia"
+    @State private var selectedNetwork = NetworkConfig.currentNetwork
     @State private var usePaymaster: Bool = true
     @State private var privateKey: String = ""
     @State private var kycText: String = "Enable KYC"
     @State private var showAddressFormatAlert: Bool = false
-    
-    private let networks = ["eth-sepolia", "aptos-testnet"]
     
     var body: some View {
         NavigationView {
@@ -72,13 +70,14 @@ struct SettingsTabView: View {
                     
                     Section(header: Text("Network")) {
                         Picker("Network", selection: $selectedNetwork) {
-                            ForEach(networks, id: \.self) { network in
-                                Text(network).tag(network)
+                            ForEach(NetworkConfig.allNetworks, id: \.self) { network in
+                                Text(network.displayName).tag(network)
                             }
                         }
                         .pickerStyle(MenuPickerStyle())
                         .onChange(of: selectedNetwork) { _, newValue in
-                            UserDefaults.standard.set(newValue, forKey: "selectedNetwork")
+                            NetworkConfig.setCurrentNetwork(newValue)
+                            NetworkConfig.notifyNetworkChanged()
                         }
                     }
                     
