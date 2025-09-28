@@ -204,10 +204,9 @@ class TransactionsData: ObservableObject, PaymentServiceDelegate {
                 currency = transaction.currency
             }
             
-            // Parse amount
-            if let amount = Double(amountString) {
-                currencyAmounts[currency, default: 0.0] += amount
-            }
+            // Convert from smallest unit to display format
+            let displayAmount = NetworkConfig.convertFromSmallestUnit(amountString, currency: currency)
+            currencyAmounts[currency, default: 0.0] += displayAmount
         }
         
         // Update the breakdown

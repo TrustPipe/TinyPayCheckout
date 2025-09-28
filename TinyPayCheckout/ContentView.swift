@@ -77,11 +77,12 @@ struct ContentView: View {
             )
             
             let payeeAddress = UserDefaults.standard.string(forKey: "receivingAddress") ?? ""
+            let convertedAmount = NetworkConfig.convertToSmallestUnit(amount.isEmpty ? "0" : amount, currency: selectedCurrency)
             PaymentService.shared.createPaymentRequest(
                 payerAddress: parsed.addr,
                 otp: parsed.otp,
                 payeeAddress: payeeAddress,
-                amount: amount.isEmpty ? "0" : amount,
+                amount: String(convertedAmount),
                 currency: selectedCurrency,
                 network: NetworkConfig.currentNetwork.rawValue
             )

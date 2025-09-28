@@ -51,7 +51,7 @@ struct TransactionsTabView: View {
                             
                             ForEach(sortedCurrencies, id: \.self) { currency in
                                 if let amount = transactionsData.revenueBreakdown[currency] {
-                                    Text(String(format: "%.2f %@", amount, currency))
+                                    Text(formatAmount(amount, currency: currency))
                                         .font(.title2)
                                         .fontWeight(.bold)
                                         .foregroundColor(.green)
@@ -117,6 +117,22 @@ struct TransactionsTabView: View {
         default: return 3
         }
     }
+    
+    private func formatAmount(_ amount: Double, currency: String) -> String {
+        // 根据币种和金额大小选择合适的小数位数
+        let decimalPlaces: Int
+        if amount < 0.01 {
+            decimalPlaces = 8  // 小金额显示更多位数
+        } else if amount < 1.0 {
+            decimalPlaces = 6
+        } else if amount < 100.0 {
+            decimalPlaces = 4
+        } else {
+            decimalPlaces = 2  // 大金额显示2位小数
+        }
+        
+        return String(format: "%.\(decimalPlaces)f %@", amount, currency)
+    }
 }
 
 struct TransactionRow: View {
@@ -150,11 +166,13 @@ struct TransactionRow: View {
                     // Show received amount if available, otherwise show requested amount
                     if let receivedAmount = transaction.receivedAmount,
                        let receivedCurrency = transaction.receivedCurrency {
-                        Text("\(receivedAmount) \(receivedCurrency)")
+                        let displayAmount = NetworkConfig.convertFromSmallestUnit(receivedAmount, currency: receivedCurrency)
+                        Text(formatAmount(displayAmount, currency: receivedCurrency))
                             .font(.headline)
                             .foregroundColor(.green)
                     } else {
-                        Text("\(transaction.amount) \(transaction.currency)")
+                        let displayAmount = NetworkConfig.convertFromSmallestUnit(transaction.amount, currency: transaction.currency)
+                        Text(formatAmount(displayAmount, currency: transaction.currency))
                             .font(.headline)
                             .foregroundColor(.primary)
                     }
@@ -205,5 +223,21 @@ struct TransactionRow: View {
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter.string(from: date)
+    }
+    
+    private func formatAmount(_ amount: Double, currency: String) -> String {
+        // 根据币种和金额大小选择合适的小数位数
+        let decimalPlaces: Int
+        if amount < 0.01 {
+            decimalPlaces = 8  // 小金额显示更多位数
+        } else if amount < 1.0 {
+            decimalPlaces = 6
+        } else if amount < 100.0 {
+            decimalPlaces = 4
+        } else {
+            decimalPlaces = 2  // 大金额显示2位小数
+        }
+        
+        return String(format: "%.\(decimalPlaces)f %@", amount, currency)
     }
 }

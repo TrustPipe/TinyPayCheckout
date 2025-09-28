@@ -125,6 +125,44 @@ struct NetworkConfig {
         return currentNetwork.explorerURL + transactionHash
     }
     
+    // 将用户输入转换为最小单位
+    static func convertToSmallestUnit(_ amount: String, currency: String) -> Int {
+        guard let value = Double(amount) else { return 0 }
+        
+        let decimals: Int
+        switch currency {
+        case "ETH":
+            decimals = 18  // 1 ETH = 10^18 wei
+        case "APT":
+            decimals = 8   // 1 APT = 10^8 octas
+        case "USDT", "USDC":
+            decimals = 8   // 假设都是8位小数
+        default:
+            decimals = 8
+        }
+        
+        return Int(value * pow(10.0, Double(decimals)))
+    }
+    
+    // 将最小单位转换为用户友好显示
+    static func convertFromSmallestUnit(_ amount: String, currency: String) -> Double {
+        guard let value = Double(amount) else { return 0.0 }
+        
+        let decimals: Int
+        switch currency {
+        case "ETH":
+            decimals = 18
+        case "APT":
+            decimals = 8
+        case "USDT", "USDC":
+            decimals = 8
+        default:
+            decimals = 8
+        }
+        
+        return value / pow(10.0, Double(decimals))
+    }
+    
     // 网络切换时的回调通知
     static func notifyNetworkChanged() {
         NotificationCenter.default.post(name: .networkChanged, object: nil)
