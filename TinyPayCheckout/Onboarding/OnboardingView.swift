@@ -91,7 +91,7 @@ struct OnboardingView: View {
                 receivingAddress = ""
             }
         } message: {
-            Text(AddressValidator.getAddressFormatError())
+            Text(AddressValidator.getAddressFormatError(for: selectedNetwork))
         }
     }
     
@@ -103,7 +103,7 @@ struct OnboardingView: View {
         
         // 在后台线程处理验证，UI更新在主线程
         Task {
-            let isValid = AddressValidator.isValidWalletAddress(receivingAddress)
+            let isValid = AddressValidator.isValidWalletAddress(receivingAddress, for: selectedNetwork)
             
             await MainActor.run {
                 defer { isProcessing = false }

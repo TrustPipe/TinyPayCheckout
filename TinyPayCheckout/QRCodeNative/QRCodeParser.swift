@@ -1,28 +1,57 @@
 import Foundation
 
 struct QRCodeParser {
-    // QR code format: addr:0x<64hex> newline or whitespace separated otp:0x<64hex>
-    // Allows any whitespace characters in between (space/\n/\r/\t)
-    private static let qrCodePattern = #"^addr:(0x[0-9a-fA-F]{64})[\s\r\n]+otp:(0x[0-9a-fA-F]{64})$"#
+    
+    // 根据网络类型生成QR码正则表达式
+    private static func getQRCodePattern(for network: NetworkConfig.NetworkType) -> String {
+        let addressLength: Int
+        switch network {
+        case .ethSepolia:
+            addressLength = 40
+        case .aptosTestnet:
+            addressLength = 64
+        }
+        
+        // OTP永远是64位
+        return #"^addr:(0x[0-9a-fA-F]{\#(addressLength)})[\s\r\n]+otp:(0x[0-9a-fA-F]{64})$"#
+    }
     
     static func getQRCodeFormatDescription() -> String {
-        return "Expected QR code format:\naddr:0x[64-digit hex]\n[whitespace or newline]\notp:0x[64-digit hex]"
+        return getQRCodeFormatDescription(for: NetworkConfig.currentNetwork)
+    }
+    
+    static func getQRCodeFormatDescription(for network: NetworkConfig.NetworkType) -> String {
+        let addressLength: Int
+        switch network {
+        case .ethSepolia:
+            addressLength = 40
+        case .aptosTestnet:
+            addressLength = 64
+        }
+        
+        return "Expected QR code format for \(network.displayName):\naddr:0x[\(addressLength)-digit hex]\n[whitespace or newline]\notp:0x[64-digit hex]"
     }
     
     static func parseQRCode(_ text: String) -> (addr: String, otp: String)? {
+        return parseQRCode(text, for: NetworkConfig.currentNetwork)
+    }
+    
+    static func parseQRCode(_ text: String, for network: NetworkConfig.NetworkType) -> (addr: String, otp: String)? {
         print("🔍 QRCode raw content: \(text)")
+        print("🌐 Current network: \(network.displayName)")
         
         let normalized = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let regex = try? NSRegularExpression(pattern: qrCodePattern, options: []) else {
-            print("❌ Failed to create regex pattern")
+        let pattern = getQRCodePattern(for: network)
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+            print("❌ Failed to create regex pattern for \(network.displayName)")
             return nil
         }
         
         let range = NSRange(location: 0, length: (normalized as NSString).length)
         guard let match = regex.firstMatch(in: normalized, options: [], range: range), match.numberOfRanges == 3 else {
-            print("❌ QRCode content doesn't match expected format: addr:0x<64hex> + whitespace + otp:0x<64hex>")
+            print("❌ QRCode content doesn't match expected format for \(network.displayName)")
             print("   Actual content: \(normalized)")
-            print("   Expected format: addr:0x[64-digit hex] [whitespace or newline] otp:0x[64-digit hex]")
+            print("   Expected format: \(getQRCodeFormatDescription(for: network))")
             return nil
         }
         
@@ -30,16 +59,17 @@ struct QRCodeParser {
         let addrString = ns.substring(with: match.range(at: 1)).lowercased()
         let otpString = ns.substring(with: match.range(at: 2)).lowercased()
         
-        // 使用AddressValidator验证两个地址格式
-        guard AddressValidator.isValidWalletAddress(addrString) else {
+        // 验证地址格式（根据网络）
+        guard AddressValidator.isValidWalletAddress(addrString, for: network) else {
             print("❌ Invalid addr format: \(addrString)")
-            print("   \(AddressValidator.getAddressFormatError())")
+            print("   \(AddressValidator.getAddressFormatError(for: network))")
             return nil
         }
         
-        guard AddressValidator.isValidWalletAddress(otpString) else {
+        // OTP永远使用64位格式验证（Aptos格式）
+        guard AddressValidator.isValidWalletAddress(otpString, for: .aptosTestnet) else {
             print("❌ Invalid otp format: \(otpString)")
-            print("   \(AddressValidator.getAddressFormatError())")
+            print("   OTP must be 64-digit hex: 0x[64-digit hex]")
             return nil
         }
         

@@ -89,9 +89,12 @@ class PaymentService {
         network: String
     ) async throws -> PaymentResponse {
         
+        // 临时测试：去掉OTP的0x前缀。TODO Remove 0xprefix in future
+        let processedOTP = otp.hasPrefix("0x") ? String(otp.dropFirst(2)) : otp
+        
         let paymentRequest = PaymentRequest(
             payer_addr: payerAddress,
-            otp: otp,
+            otp: processedOTP,
             payee_addr: payeeAddress,
             amount: Int(amount) ?? 0,
             currency: currency,
@@ -150,8 +153,9 @@ class PaymentService {
     }
     
     // Async function to query transaction status
-    func queryTransactionStatus(transactionHash: String) async throws -> TransactionStatusResponse {
-        guard let url = URL(string: "\(baseURL)/api/payments/\(transactionHash)") else {
+    func queryTransactionStatus(transactionHash: String, network: String? = nil) async throws -> TransactionStatusResponse {
+        let networkParam = network ?? NetworkConfig.currentNetwork.rawValue
+        guard let url = URL(string: "\(baseURL)/api/payments/\(transactionHash)?network=\(networkParam)") else {
             throw PaymentError.invalidURL
         }
         
@@ -224,7 +228,7 @@ class PaymentService {
                         )
                     }
                     delegate?.paymentCreated(transactionHash: transactionHash)
-                    await pollTransactionStatus(transactionHash: transactionHash)
+                    await pollTransactionStatus(transactionHash: transactionHash, network: network)
                 } else {
                     // No transaction hash or empty hash means failure
                     print("❌ No transaction hash received from server")
@@ -279,8 +283,8 @@ class PaymentService {
     }
     
     // Poll transaction status up to 5 times with 1-second intervals
-    private func pollTransactionStatus(transactionHash: String) async {
-        print("🔍 Starting transaction status polling for: \(transactionHash)")
+    private func pollTransactionStatus(transactionHash: String, network: String) async {
+        print("🔍 Starting transaction status polling for: \(transactionHash) on network: \(network)")
         
         let maxAttempts = 5
         let pollInterval: UInt64 = 1_000_000_000 // 1 second in nanoseconds
@@ -289,7 +293,7 @@ class PaymentService {
             print("📊 Polling attempt \(attempt)/\(maxAttempts)")
             
             do {
-                let statusResponse = try await queryTransactionStatus(transactionHash: transactionHash)
+                let statusResponse = try await queryTransactionStatus(transactionHash: transactionHash, network: network)
                 print("📋 Transaction status response: \(statusResponse)")
                 
                 // Check business status code

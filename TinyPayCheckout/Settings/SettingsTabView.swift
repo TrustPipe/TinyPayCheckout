@@ -43,7 +43,7 @@ struct SettingsTabView: View {
 
                 Form {
                     Section(header: Text("Change Address")) {
-                        TextField(AddressValidator.getAddressExample(), text: $newAddress)
+                        TextField(AddressValidator.getAddressExample(for: selectedNetwork), text: $newAddress)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.asciiCapable)
                             .autocapitalization(.none)
@@ -52,8 +52,8 @@ struct SettingsTabView: View {
 
                         Button("Save") {
                             if !newAddress.isEmpty {
-                                // Check Address format
-                                if AddressValidator.isValidWalletAddress(newAddress) {
+                                // Check Address format for selected network
+                                if AddressValidator.isValidWalletAddress(newAddress, for: selectedNetwork) {
                                     receivingAddress = newAddress
                                     UserDefaults.standard.set(newAddress, forKey: "receivingAddress")
                                     newAddress = ""
@@ -111,7 +111,7 @@ struct SettingsTabView: View {
                 newAddress = ""
             }
         } message: {
-            Text(AddressValidator.getAddressFormatError())
+            Text(AddressValidator.getAddressFormatError(for: selectedNetwork))
         }
     }
 }

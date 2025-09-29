@@ -146,7 +146,7 @@ class TransactionsData: ObservableObject, PaymentServiceDelegate {
             
             do {
                 print("📊 Checking status for transaction: \(hash)")
-                let statusResponse = try await PaymentService.shared.queryTransactionStatus(transactionHash: hash)
+                let statusResponse = try await PaymentService.shared.queryTransactionStatus(transactionHash: hash, network: NetworkConfig.currentNetwork.rawValue)
                 
                 // Update status based on business code
                 switch statusResponse.code {
