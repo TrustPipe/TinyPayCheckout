@@ -19,6 +19,8 @@ class AddressValidator {
         let regex: NSRegularExpression?
         
         switch network {
+        case .celoSepolia:
+            regex = ethAddressRegex
         case .ethSepolia:
             regex = ethAddressRegex
         case .aptosTestnet:
@@ -36,6 +38,8 @@ class AddressValidator {
     
     static func getAddressFormatError(for network: NetworkConfig.NetworkType) -> String {
         switch network {
+        case .celoSepolia:
+            return "Address must start with '0x' followed by exactly 40 hexadecimal characters."
         case .ethSepolia:
             return "Address must start with '0x' followed by exactly 40 hexadecimal characters."
         case .aptosTestnet:
@@ -49,6 +53,8 @@ class AddressValidator {
     
     static func getAddressExample(for network: NetworkConfig.NetworkType) -> String {
         switch network {
+        case .celoSepolia:
+            return "0x1234567890abcdef1234567890abcdef12345678"
         case .ethSepolia:
             return "0x1234567890abcdef1234567890abcdef12345678"
         case .aptosTestnet:

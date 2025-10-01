@@ -7,6 +7,7 @@ struct NetworkConfig {
     enum NetworkType: String, CaseIterable {
         case ethSepolia = "eth-sepolia"
         case aptosTestnet = "aptos-testnet"
+        case celoSepolia = "celo-sepolia"
         
         // Network display name
         var displayName: String {
@@ -15,6 +16,8 @@ struct NetworkConfig {
                 return "Ethereum Sepolia"
             case .aptosTestnet:
                 return "Aptos Testnet"
+            case .celoSepolia:
+                return "Celo Sepolia"
             }
         }
         
@@ -25,6 +28,8 @@ struct NetworkConfig {
                 return ["ETH", "USDT", "USDC"]
             case .aptosTestnet:
                 return ["APT", "USDT", "USDC"]
+            case .celoSepolia:
+                return ["CELO", "USDT", "USDC"]
             }
         }
         
@@ -35,6 +40,8 @@ struct NetworkConfig {
                 return "ETH"
             case .aptosTestnet:
                 return "APT"
+            case .celoSepolia:
+                return "CELO"
             }
         }
         
@@ -45,6 +52,8 @@ struct NetworkConfig {
                 return "hexagon"
             case .aptosTestnet:
                 return "diamond"
+            case .celoSepolia:
+                return "circle"
             }
         }
         
@@ -55,6 +64,8 @@ struct NetworkConfig {
                 return "blue"
             case .aptosTestnet:
                 return "green"
+            case .celoSepolia:
+                return "yellow"
             }
         }
         
@@ -65,6 +76,8 @@ struct NetworkConfig {
                 return "https://sepolia.etherscan.io/tx/"
             case .aptosTestnet:
                 return "https://explorer.aptoslabs.com/txn/"
+            case .celoSepolia:
+                return "https://celo-sepolia.blockscout.com/txs/"
             }
         }
     }
@@ -130,10 +143,12 @@ struct NetworkConfig {
         switch currency {
         case "ETH":
             return 18  // 1 ETH = 10^18 wei
+        case "CELO":
+            return 18  // 1 CELO = 10^18 wei
         case "APT":
             return 8   // 1 APT = 10^8 octas
         case "USDT", "USDC":
-            return 6   // Assume all are 8 decimal places
+            return 6   // 1 USDT/USDC = 10^6 micro units
         default:
             return 8
         }

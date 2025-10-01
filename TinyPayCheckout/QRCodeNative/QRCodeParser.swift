@@ -6,6 +6,8 @@ struct QRCodeParser {
     private static func getQRCodePattern(for network: NetworkConfig.NetworkType) -> String {
         let addressLength: Int
         switch network {
+        case .celoSepolia:
+            addressLength = 40
         case .ethSepolia:
             addressLength = 40
         case .aptosTestnet:
@@ -23,6 +25,8 @@ struct QRCodeParser {
     static func getQRCodeFormatDescription(for network: NetworkConfig.NetworkType) -> String {
         let addressLength: Int
         switch network {
+        case .celoSepolia:
+            addressLength = 40
         case .ethSepolia:
             addressLength = 40
         case .aptosTestnet:
