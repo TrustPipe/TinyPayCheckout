@@ -11,7 +11,7 @@ struct OnboardingView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 40) {
-                // Logo 或 App 名称
+                // Logo or App name
                 VStack(spacing: 16) {
                     Image("TinypayCheckout")
                         .resizable()
@@ -29,7 +29,7 @@ struct OnboardingView: View {
                 }
                 .padding(.top, 80)
                 
-                // 输入区域
+                // Input area
                 VStack(spacing: 24) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Receiving Address")
@@ -77,7 +77,7 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 32)
                 
-                // 底部说明
+                // Bottom description
                 Text("You can change this address later in Settings")
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -87,7 +87,7 @@ struct OnboardingView: View {
         .background(Color(.systemBackground))
         .alert("Invalid Address Format", isPresented: $showAddressFormatAlert) {
             Button("OK") {
-                // 清空输入框，让用户重新输入
+                // Clear input field, let user re-enter
                 receivingAddress = ""
             }
         } message: {
@@ -96,12 +96,12 @@ struct OnboardingView: View {
     }
     
     private func processStartButton() {
-        // 防止重复点击
+        // Prevent duplicate clicks
         guard !isProcessing else { return }
         
         isProcessing = true
         
-        // 在后台线程处理验证，UI更新在主线程
+        // Handle validation in background thread, UI updates on main thread
         Task {
             let isValid = AddressValidator.isValidWalletAddress(receivingAddress, for: selectedNetwork)
             
@@ -109,7 +109,7 @@ struct OnboardingView: View {
                 defer { isProcessing = false }
                 
                 if isValid {
-                    // 保存地址和网络到本地存储
+                    // Save address and network to local storage
                     UserDefaults.standard.set(receivingAddress, forKey: "receivingAddress")
                     NetworkConfig.setCurrentNetwork(selectedNetwork)
                     UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
@@ -125,7 +125,7 @@ struct OnboardingView: View {
     }
 }
 
-// 分离的输入框组件，减少主视图重绘
+// Separate input field component to reduce main view redraws
 struct AddressInputField: View {
     @Binding var text: String
     @Binding var showError: Bool

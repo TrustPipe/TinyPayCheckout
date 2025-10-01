@@ -61,7 +61,7 @@ struct ContentView: View {
             guard let raw = newValue else { return }
 
             guard let parsed = QRCodeParser.parseQRCode(raw) else {
-                // QR码格式不正确，显示错误弹窗
+                // QR code format is incorrect, show error dialog
                 showQRFormatError = true
                 return
             }
@@ -89,7 +89,7 @@ struct ContentView: View {
         }
         .alert("Invalid QR Code Format", isPresented: $showQRFormatError) {
             Button("OK") {
-                // 清空扫描结果，用户可以重新扫描
+                // Clear scan result, user can scan again
                 scannedCode = nil
             }
         } message: {

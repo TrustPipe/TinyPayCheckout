@@ -1,12 +1,12 @@
 import Foundation
 
 class AddressValidator {
-    // 以太坊地址正则表达式
+    // Ethereum address regular expression
     private static let ethAddressRegex: NSRegularExpression? = {
         return try? NSRegularExpression(pattern: "^0x[0-9a-fA-F]{40}$")
     }()
     
-    // Aptos地址正则表达式
+    // Aptos address regular expression
     private static let aptosAddressRegex: NSRegularExpression? = {
         return try? NSRegularExpression(pattern: "^0x[0-9a-fA-F]{64}$")
     }()

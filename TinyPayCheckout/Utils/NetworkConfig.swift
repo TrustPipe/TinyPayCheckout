@@ -1,14 +1,14 @@
 import Foundation
 
-// 网络配置管理器
+// Network configuration manager
 struct NetworkConfig {
     
-    // 支持的网络类型
+    // Supported network types
     enum NetworkType: String, CaseIterable {
         case ethSepolia = "eth-sepolia"
         case aptosTestnet = "aptos-testnet"
         
-        // 网络显示名称
+        // Network display name
         var displayName: String {
             switch self {
             case .ethSepolia:
@@ -18,7 +18,7 @@ struct NetworkConfig {
             }
         }
         
-        // 支持的币种
+        // Supported currencies
         var supportedCurrencies: [String] {
             switch self {
             case .ethSepolia:
@@ -28,7 +28,7 @@ struct NetworkConfig {
             }
         }
         
-        // 默认币种
+        // Default currency
         var defaultCurrency: String {
             switch self {
             case .ethSepolia:
@@ -38,7 +38,7 @@ struct NetworkConfig {
             }
         }
         
-        // 网络图标
+        // Network icon
         var iconName: String {
             switch self {
             case .ethSepolia:
@@ -48,7 +48,7 @@ struct NetworkConfig {
             }
         }
         
-        // 网络颜色
+        // Network color
         var accentColor: String {
             switch self {
             case .ethSepolia:
@@ -58,7 +58,7 @@ struct NetworkConfig {
             }
         }
         
-        // 区块链浏览器URL前缀
+        // Blockchain explorer URL prefix
         var explorerURL: String {
             switch self {
             case .ethSepolia:
@@ -69,63 +69,63 @@ struct NetworkConfig {
         }
     }
     
-    // 获取当前选择的网络
+    // Get currently selected network
     static var currentNetwork: NetworkType {
         let networkString = UserDefaults.standard.string(forKey: "selectedNetwork") ?? NetworkType.ethSepolia.rawValue
         return NetworkType(rawValue: networkString) ?? .ethSepolia
     }
     
-    // 设置当前网络
+    // Set current network
     static func setCurrentNetwork(_ network: NetworkType) {
         UserDefaults.standard.set(network.rawValue, forKey: "selectedNetwork")
     }
     
-    // 获取当前网络支持的币种
+    // Get current network supported currencies
     static var currentSupportedCurrencies: [String] {
         return currentNetwork.supportedCurrencies
     }
     
-    // 获取当前网络的默认币种
+    // Get current network default currency
     static var currentDefaultCurrency: String {
         return currentNetwork.defaultCurrency
     }
     
-    // 验证币种是否在当前网络中受支持
+    // Validate if currency is supported in current network
     static func isCurrencySupported(_ currency: String) -> Bool {
         return currentSupportedCurrencies.contains(currency)
     }
     
-    // 获取有效的币种选择（如果当前币种不支持，返回默认币种）
+    // Get valid currency selection (return default currency if current currency is not supported)
     static func getValidCurrency(_ currency: String) -> String {
         return isCurrencySupported(currency) ? currency : currentDefaultCurrency
     }
     
-    // 获取所有可用的网络列表
+    // Get all available networks list
     static var allNetworks: [NetworkType] {
         return NetworkType.allCases
     }
     
-    // 获取网络显示名称列表
+    // Get network display names list
     static var networkDisplayNames: [String] {
         return allNetworks.map { $0.displayName }
     }
     
-    // 获取网络原始值列表（用于API调用）
+    // Get network raw values list (for API calls)
     static var networkRawValues: [String] {
         return allNetworks.map { $0.rawValue }
     }
     
-    // 通过显示名称获取网络类型
+    // Get network type through display name
     static func networkType(from displayName: String) -> NetworkType? {
         return allNetworks.first { $0.displayName == displayName }
     }
     
-    // 获取区块链浏览器完整URL
+    // Get blockchain explorer complete URL
     static func getExplorerURL(for transactionHash: String) -> String {
         return currentNetwork.explorerURL + transactionHash
     }
     
-    // 将用户输入转换为最小单位
+    // Convert user input to smallest unit
     static func convertToSmallestUnit(_ amount: String, currency: String) -> Int {
         guard let value = Double(amount) else { return 0 }
         
@@ -136,7 +136,7 @@ struct NetworkConfig {
         case "APT":
             decimals = 8   // 1 APT = 10^8 octas
         case "USDT", "USDC":
-            decimals = 8   // 假设都是8位小数
+            decimals = 8   // Assume all are 8 decimal places
         default:
             decimals = 8
         }
@@ -144,7 +144,7 @@ struct NetworkConfig {
         return Int(value * pow(10.0, Double(decimals)))
     }
     
-    // 将最小单位转换为用户友好显示
+    // Convert smallest unit to user-friendly display
     static func convertFromSmallestUnit(_ amount: String, currency: String) -> Double {
         guard let value = Double(amount) else { return 0.0 }
         
@@ -163,13 +163,13 @@ struct NetworkConfig {
         return value / pow(10.0, Double(decimals))
     }
     
-    // 网络切换时的回调通知
+    // Callback notification when network switches
     static func notifyNetworkChanged() {
         NotificationCenter.default.post(name: .networkChanged, object: nil)
     }
 }
 
-// 自定义通知名称
+// Custom notification name
 extension Notification.Name {
     static let networkChanged = Notification.Name("NetworkChanged")
 }

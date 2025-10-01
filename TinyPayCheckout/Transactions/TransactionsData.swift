@@ -32,7 +32,7 @@ class TransactionsData: ObservableObject, PaymentServiceDelegate {
             receivedAmount: nil,
             receivedCurrency: nil
         )
-        transactions.insert(newTransaction, at: 0) // 最新的在顶部
+        transactions.insert(newTransaction, at: 0) // Latest at the top
         return newTransaction.id
     }
     
@@ -87,7 +87,7 @@ class TransactionsData: ObservableObject, PaymentServiceDelegate {
                     receivedAmount: nil,
                     receivedCurrency: nil
                 )
-                self.transactions.insert(newTransaction, at: 0) // 最新的在顶部
+                self.transactions.insert(newTransaction, at: 0) // Latest at the top
                 print("✅ Created transaction record with hash: \(transactionHash)")
                 
                 // Clear pending data

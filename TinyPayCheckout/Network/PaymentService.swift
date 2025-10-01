@@ -16,20 +16,20 @@ struct PaymentRequest: Codable {
     let network: String
 }
 
-// 统一的API响应格式
+// Unified API response format
 struct APIResponse<T: Codable>: Codable {
     let code: Int
     let data: T?
 }
 
-// 创建支付的数据结构
+// Payment creation data structure
 struct PaymentData: Codable {
     let status: String?
     let transaction_hash: String?
     let missing_fields: [String]?
 }
 
-// 查询交易状态的数据结构
+// Transaction status query data structure
 struct TransactionStatusData: Codable {
     let status: String?
     let received_amount: Int?
@@ -89,7 +89,7 @@ class PaymentService {
         network: String
     ) async throws -> PaymentResponse {
         
-        // 临时测试：去掉OTP的0x前缀。TODO Remove 0xprefix in future
+        // Temporary test: Remove 0x prefix from OTP. TODO Remove 0x prefix in future
         let processedOTP = otp.hasPrefix("0x") ? String(otp.dropFirst(2)) : otp
         
         let paymentRequest = PaymentRequest(

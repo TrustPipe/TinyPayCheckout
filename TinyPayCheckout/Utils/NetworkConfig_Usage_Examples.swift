@@ -1,8 +1,8 @@
-// NetworkConfig 使用示例
-// 这个文件展示了如何在各个组件中使用 NetworkConfig
+// NetworkConfig Usage Examples
+// This file demonstrates how to use NetworkConfig in various components
 
 /*
-=== 在 AmountSetterView 中的使用 ===
+=== Usage in AmountSetterView ===
 
 import SwiftUI
 
@@ -24,7 +24,7 @@ struct AmountSetterView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                 
-                // 显示当前网络
+                // Display current network
                 HStack {
                     Image(systemName: currentNetwork.iconName)
                         .foregroundColor(Color(currentNetwork.accentColor))
@@ -90,7 +90,7 @@ struct AmountSetterView: View {
     }
 }
 
-=== 在 SettingsTabView 中的使用 ===
+=== Usage in SettingsTabView ===
 
 import SwiftUI
 
@@ -106,7 +106,7 @@ struct SettingsTabView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // 当前收款地址显示区域
+                // Current receiving address display area
                 VStack(spacing: 12) {
                     Text("Current Receiving Address")
                         .font(.headline)
@@ -136,7 +136,7 @@ struct SettingsTabView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.blue.opacity(0.1))
                 
-                // 设置选项列表
+                // Settings options list
                 Form {
                     Section(header: Text("Change Address")) {
                         TextField(AddressValidator.getAddressExample(), text: $newAddress)
@@ -148,11 +148,11 @@ struct SettingsTabView: View {
                         
                         Button("Save") {
                             if !newAddress.isEmpty {
-                                // 验证地址格式
+                                // Validate address format
                                 if AddressValidator.isValidWalletAddress(newAddress) {
                                     receivingAddress = newAddress
                                     UserDefaults.standard.set(newAddress, forKey: "receivingAddress")
-                                    newAddress = "" // 清空输入框
+                                    newAddress = "" // Clear input field
                                 } else {
                                     showAddressFormatAlert = true
                                 }
@@ -209,7 +209,7 @@ struct SettingsTabView: View {
         }
         .alert("Invalid Address Format", isPresented: $showAddressFormatAlert) {
             Button("OK") {
-                // 清空输入框，让用户重新输入
+                // Clear input field, let user re-enter
                 newAddress = ""
             }
         } message: {
@@ -218,7 +218,7 @@ struct SettingsTabView: View {
     }
 }
 
-=== 在 ContentView 中的使用 ===
+=== Usage in ContentView ===
 
 import SwiftUI
 
@@ -276,7 +276,7 @@ struct ContentView: View {
             guard let raw = newValue else { return }
 
             guard let parsed = QRCodeParser.parseQRCode(raw) else {
-                // QR码格式不正确，显示错误弹窗
+                // QR code format is incorrect, show error dialog
                 showQRFormatError = true
                 return
             }
@@ -303,7 +303,7 @@ struct ContentView: View {
         }
         .alert("Invalid QR Code Format", isPresented: $showQRFormatError) {
             Button("OK") {
-                // 清空扫描结果，用户可以重新扫描
+                // Clear scan result, user can scan again
                 scannedCode = nil
             }
         } message: {
@@ -328,7 +328,7 @@ struct ContentView: View {
     }
 }
 
-=== 在 OnboardingView 中的使用 ===
+=== Usage in OnboardingView ===
 
 import SwiftUI
 
@@ -343,7 +343,7 @@ struct OnboardingView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 40) {
-                // Logo 或 App 名称
+                // Logo or App name
                 VStack(spacing: 16) {
                     Image("TinypayCheckout")
                         .resizable()
@@ -362,7 +362,7 @@ struct OnboardingView: View {
                 }
                 .padding(.top, 80)
                 
-                // 输入区域
+                // Input area
                 VStack(spacing: 24) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Select Network")
@@ -412,7 +412,7 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 32)
                 
-                // 底部说明
+                // Bottom description
                 Text("You can change this address later in Settings")
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -422,7 +422,7 @@ struct OnboardingView: View {
         .background(Color(.systemBackground))
         .alert("Invalid Address Format", isPresented: $showAddressFormatAlert) {
             Button("OK") {
-                // 清空输入框，让用户重新输入
+                // Clear input field, let user re-enter
                 receivingAddress = ""
             }
         } message: {
@@ -431,12 +431,12 @@ struct OnboardingView: View {
     }
     
     private func processStartButton() {
-        // 防止重复点击
+        // Prevent duplicate clicks
         guard !isProcessing else { return }
         
         isProcessing = true
         
-        // 在后台线程处理验证，UI更新在主线程
+        // Handle validation in background thread, UI updates on main thread
         Task {
             let isValid = AddressValidator.isValidWalletAddress(receivingAddress)
             
@@ -444,7 +444,7 @@ struct OnboardingView: View {
                 defer { isProcessing = false }
                 
                 if isValid {
-                    // 保存地址和网络到本地存储
+                    // Save address and network to local storage
                     UserDefaults.standard.set(receivingAddress, forKey: "receivingAddress")
                     NetworkConfig.setCurrentNetwork(selectedNetwork)
                     UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")

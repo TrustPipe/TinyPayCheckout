@@ -2,7 +2,7 @@ import Foundation
 
 struct QRCodeParser {
     
-    // 根据网络类型生成QR码正则表达式
+    // Generate QR code regex pattern based on network type
     private static func getQRCodePattern(for network: NetworkConfig.NetworkType) -> String {
         let addressLength: Int
         switch network {
@@ -12,7 +12,7 @@ struct QRCodeParser {
             addressLength = 64
         }
         
-        // OTP永远是64位
+        // OTP is always 64-bit
         return #"^addr:(0x[0-9a-fA-F]{\#(addressLength)})[\s\r\n]+otp:(0x[0-9a-fA-F]{64})$"#
     }
     
@@ -59,14 +59,14 @@ struct QRCodeParser {
         let addrString = ns.substring(with: match.range(at: 1)).lowercased()
         let otpString = ns.substring(with: match.range(at: 2)).lowercased()
         
-        // 验证地址格式（根据网络）
+        // Validate address format (based on network)
         guard AddressValidator.isValidWalletAddress(addrString, for: network) else {
             print("❌ Invalid addr format: \(addrString)")
             print("   \(AddressValidator.getAddressFormatError(for: network))")
             return nil
         }
         
-        // OTP永远使用64位格式验证（Aptos格式）
+        // OTP always uses 64-bit format validation (Aptos format)
         guard AddressValidator.isValidWalletAddress(otpString, for: .aptosTestnet) else {
             print("❌ Invalid otp format: \(otpString)")
             print("   OTP must be 64-digit hex: 0x[64-digit hex]")

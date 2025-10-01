@@ -9,7 +9,7 @@ struct PaymentTabView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // Checkout标题和收费金额显示区域 - 统一色块
+                // Checkout title and billing amount display area - unified color block
                 VStack(spacing: 12) {
                     Text("The total biil is")
                         .font(.headline)
@@ -36,7 +36,7 @@ struct PaymentTabView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.green.opacity(0.1))
                 
-                // 操作按钮列表
+                // Action button list
                 Form {
                     Section(header: Text("Bill Settings")) {
                         Button("Modify Bill Amount") {

@@ -25,7 +25,7 @@ struct TransactionsTabView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // 总收入显示区域
+                // Total revenue display area
                 VStack(spacing: 12) {
                     Text("Total Revenue")
                         .font(.headline)
@@ -73,7 +73,7 @@ struct TransactionsTabView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.green.opacity(0.1))
                 
-                // 交易列表
+                // Transaction list
                 if transactionsData.transactions.isEmpty {
                     VStack(spacing: 16) {
                         Image(systemName: "list.bullet.clipboard")
@@ -119,16 +119,16 @@ struct TransactionsTabView: View {
     }
     
     private func formatAmount(_ amount: Double, currency: String) -> String {
-        // 根据币种和金额大小选择合适的小数位数
+        // Choose appropriate decimal places based on currency and amount size
         let decimalPlaces: Int
         if amount < 0.01 {
-            decimalPlaces = 8  // 小金额显示更多位数
+            decimalPlaces = 8  // Small amounts show more decimal places
         } else if amount < 1.0 {
             decimalPlaces = 6
         } else if amount < 100.0 {
             decimalPlaces = 4
         } else {
-            decimalPlaces = 2  // 大金额显示2位小数
+            decimalPlaces = 2  // Large amounts show 2 decimal places
         }
         
         return String(format: "%.\(decimalPlaces)f %@", amount, currency)
@@ -226,16 +226,16 @@ struct TransactionRow: View {
     }
     
     private func formatAmount(_ amount: Double, currency: String) -> String {
-        // 根据币种和金额大小选择合适的小数位数
+        // Choose appropriate decimal places based on currency and amount size
         let decimalPlaces: Int
         if amount < 0.01 {
-            decimalPlaces = 8  // 小金额显示更多位数
+            decimalPlaces = 8  // Small amounts show more decimal places
         } else if amount < 1.0 {
             decimalPlaces = 6
         } else if amount < 100.0 {
             decimalPlaces = 4
         } else {
-            decimalPlaces = 2  // 大金额显示2位小数
+            decimalPlaces = 2  // Large amounts show 2 decimal places
         }
         
         return String(format: "%.\(decimalPlaces)f %@", amount, currency)
