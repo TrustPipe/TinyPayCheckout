@@ -125,41 +125,31 @@ struct NetworkConfig {
         return currentNetwork.explorerURL + transactionHash
     }
     
+    // Get decimal places for currency
+    static func getDecimalPlaces(for currency: String) -> Int {
+        switch currency {
+        case "ETH":
+            return 18  // 1 ETH = 10^18 wei
+        case "APT":
+            return 8   // 1 APT = 10^8 octas
+        case "USDT", "USDC":
+            return 6   // Assume all are 8 decimal places
+        default:
+            return 8
+        }
+    }
+    
     // Convert user input to smallest unit
     static func convertToSmallestUnit(_ amount: String, currency: String) -> Int {
         guard let value = Double(amount) else { return 0 }
-        
-        let decimals: Int
-        switch currency {
-        case "ETH":
-            decimals = 18  // 1 ETH = 10^18 wei
-        case "APT":
-            decimals = 8   // 1 APT = 10^8 octas
-        case "USDT", "USDC":
-            decimals = 8   // Assume all are 8 decimal places
-        default:
-            decimals = 8
-        }
-        
+        let decimals = getDecimalPlaces(for: currency)
         return Int(value * pow(10.0, Double(decimals)))
     }
     
     // Convert smallest unit to user-friendly display
     static func convertFromSmallestUnit(_ amount: String, currency: String) -> Double {
         guard let value = Double(amount) else { return 0.0 }
-        
-        let decimals: Int
-        switch currency {
-        case "ETH":
-            decimals = 18
-        case "APT":
-            decimals = 8
-        case "USDT", "USDC":
-            decimals = 8
-        default:
-            decimals = 8
-        }
-        
+        let decimals = getDecimalPlaces(for: currency)
         return value / pow(10.0, Double(decimals))
     }
     
