@@ -7,7 +7,7 @@ class TransactionsData: ObservableObject, PaymentServiceDelegate {
             calculateTotalRevenue()
         }
     }
-    @Published var totalRevenue: String = "0.00 APT"
+    @Published var totalRevenue: String = "0.00 \(NetworkConfig.currentDefaultCurrency)"
     @Published var revenueBreakdown: [String: Double] = [:]
     
     // Store pending transaction data until we get a hash
@@ -17,7 +17,24 @@ class TransactionsData: ObservableObject, PaymentServiceDelegate {
         // Set self as delegate for payment service
         PaymentService.shared.delegate = self
         
+        // Listen for network changes to update currency display
+        NotificationCenter.default.addObserver(
+            self, 
+            selector: #selector(networkChanged), 
+            name: .networkChanged, 
+            object: nil
+        )
+        
         // Initial calculation
+        calculateTotalRevenue()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func networkChanged() {
+        // Recalculate revenue with new network's default currency
         calculateTotalRevenue()
     }
     
@@ -214,7 +231,7 @@ class TransactionsData: ObservableObject, PaymentServiceDelegate {
         
         // Format total revenue display - show main currency or "Multiple Currencies"
         if currencyAmounts.isEmpty {
-            totalRevenue = "0.00 APT"
+            totalRevenue = "0.00 \(NetworkConfig.currentDefaultCurrency)"
         } else if currencyAmounts.count == 1, let (currency, amount) = currencyAmounts.first {
             // Single currency
             totalRevenue = String(format: "%.2f %@", amount, currency)

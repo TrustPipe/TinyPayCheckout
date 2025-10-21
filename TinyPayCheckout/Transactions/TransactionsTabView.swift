@@ -34,7 +34,7 @@ struct TransactionsTabView: View {
                     // Display each currency on its own line
                     VStack(spacing: 6) {
                         if transactionsData.revenueBreakdown.isEmpty {
-                            Text("0.00 APT")
+                            Text("0.00 \(NetworkConfig.currentDefaultCurrency)")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundColor(.green)
@@ -113,7 +113,7 @@ struct TransactionsTabView: View {
         switch currency {
         case "USDT": return 0
         case "USDC": return 1
-        case "APT": return 2
+        case NetworkConfig.currentDefaultCurrency: return 2  // Current network's default currency
         default: return 3
         }
     }
