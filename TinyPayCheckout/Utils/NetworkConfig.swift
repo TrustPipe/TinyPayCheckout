@@ -8,6 +8,7 @@ struct NetworkConfig {
         case ethSepolia = "eth-sepolia"
         case aptosTestnet = "aptos-testnet"
         case celoSepolia = "celo-sepolia"
+        case u2uMainnet = "u2u-mainnet"
         
         // Network display name
         var displayName: String {
@@ -18,6 +19,8 @@ struct NetworkConfig {
                 return "Aptos Testnet"
             case .celoSepolia:
                 return "Celo Sepolia"
+            case .u2uMainnet:
+                return "U2U Network"
             }
         }
         
@@ -30,6 +33,8 @@ struct NetworkConfig {
                 return ["APT", "USDT", "USDC"]
             case .celoSepolia:
                 return ["CELO", "USDT", "USDC"]
+            case .u2uMainnet:
+                return ["U2U", "USDT", "USDC"]
             }
         }
         
@@ -42,6 +47,8 @@ struct NetworkConfig {
                 return "APT"
             case .celoSepolia:
                 return "CELO"
+            case .u2uMainnet:
+                return "U2U"
             }
         }
         
@@ -54,6 +61,8 @@ struct NetworkConfig {
                 return "diamond"
             case .celoSepolia:
                 return "circle"
+            case .u2uMainnet:
+                return "square"
             }
         }
         
@@ -66,6 +75,8 @@ struct NetworkConfig {
                 return "green"
             case .celoSepolia:
                 return "yellow"
+            case .u2uMainnet:
+                return "purple"
             }
         }
         
@@ -78,6 +89,40 @@ struct NetworkConfig {
                 return "https://explorer.aptoslabs.com/txn/"
             case .celoSepolia:
                 return "https://celo-sepolia.blockscout.com/txs/"
+            case .u2uMainnet:
+                return "https://u2uscan.xyz/tx/"
+            }
+        }
+        
+        // Address length (hex digits after 0x)
+        var addressLength: Int {
+            switch self {
+            case .ethSepolia, .celoSepolia, .u2uMainnet:
+                return 40  // EVM-compatible chains use 40-char addresses
+            case .aptosTestnet:
+                return 64  // Aptos uses 64-char addresses
+            }
+        }
+        
+        // Address validation regex pattern
+        var addressRegexPattern: String {
+            return "^0x[0-9a-fA-F]{\(addressLength)}$"
+        }
+        
+        // Address format error message
+        var addressFormatError: String {
+            return "Address must start with '0x' followed by exactly \(addressLength) hexadecimal characters."
+        }
+        
+        // Address example
+        var addressExample: String {
+            switch addressLength {
+            case 40:
+                return "0x1234567890abcdef1234567890abcdef12345678"
+            case 64:
+                return "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+            default:
+                return "0x..."
             }
         }
     }
@@ -145,6 +190,8 @@ struct NetworkConfig {
             return 18  // 1 ETH = 10^18 wei
         case "CELO":
             return 18  // 1 CELO = 10^18 wei
+        case "U2U":
+            return 18  // 1 U2U = 10^18 wei
         case "APT":
             return 8   // 1 APT = 10^8 octas
         case "USDT", "USDC":

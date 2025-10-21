@@ -1,35 +1,33 @@
 import Foundation
 
 class AddressValidator {
-    // Ethereum address regular expression
-    private static let ethAddressRegex: NSRegularExpression? = {
-        return try? NSRegularExpression(pattern: "^0x[0-9a-fA-F]{40}$")
-    }()
+    // Cache for compiled regex patterns
+    private static var regexCache: [String: NSRegularExpression] = [:]
     
-    // Aptos address regular expression
-    private static let aptosAddressRegex: NSRegularExpression? = {
-        return try? NSRegularExpression(pattern: "^0x[0-9a-fA-F]{64}$")
-    }()
+    // Get or create regex for a network
+    private static func getRegex(for network: NetworkConfig.NetworkType) -> NSRegularExpression? {
+        let pattern = network.addressRegexPattern
+        
+        if let cachedRegex = regexCache[pattern] {
+            return cachedRegex
+        }
+        
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            return nil
+        }
+        
+        regexCache[pattern] = regex
+        return regex
+    }
     
     static func isValidWalletAddress(_ address: String) -> Bool {
         return isValidWalletAddress(address, for: NetworkConfig.currentNetwork)
     }
     
     static func isValidWalletAddress(_ address: String, for network: NetworkConfig.NetworkType) -> Bool {
-        let regex: NSRegularExpression?
-        
-        switch network {
-        case .celoSepolia:
-            regex = ethAddressRegex
-        case .ethSepolia:
-            regex = ethAddressRegex
-        case .aptosTestnet:
-            regex = aptosAddressRegex
-        }
-        
-        guard let validRegex = regex else { return false }
+        guard let regex = getRegex(for: network) else { return false }
         let range = NSRange(location: 0, length: address.count)
-        return validRegex.firstMatch(in: address, options: [], range: range) != nil
+        return regex.firstMatch(in: address, options: [], range: range) != nil
     }
     
     static func getAddressFormatError() -> String {
@@ -37,14 +35,7 @@ class AddressValidator {
     }
     
     static func getAddressFormatError(for network: NetworkConfig.NetworkType) -> String {
-        switch network {
-        case .celoSepolia:
-            return "Address must start with '0x' followed by exactly 40 hexadecimal characters."
-        case .ethSepolia:
-            return "Address must start with '0x' followed by exactly 40 hexadecimal characters."
-        case .aptosTestnet:
-            return "Address must start with '0x' followed by exactly 64 hexadecimal characters."
-        }
+        return network.addressFormatError
     }
     
     static func getAddressExample() -> String {
@@ -52,13 +43,6 @@ class AddressValidator {
     }
     
     static func getAddressExample(for network: NetworkConfig.NetworkType) -> String {
-        switch network {
-        case .celoSepolia:
-            return "0x1234567890abcdef1234567890abcdef12345678"
-        case .ethSepolia:
-            return "0x1234567890abcdef1234567890abcdef12345678"
-        case .aptosTestnet:
-            return "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
-        }
+        return network.addressExample
     }
 }

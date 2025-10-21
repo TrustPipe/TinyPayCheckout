@@ -4,16 +4,7 @@ struct QRCodeParser {
     
     // Generate QR code regex pattern based on network type
     private static func getQRCodePattern(for network: NetworkConfig.NetworkType) -> String {
-        let addressLength: Int
-        switch network {
-        case .celoSepolia:
-            addressLength = 40
-        case .ethSepolia:
-            addressLength = 40
-        case .aptosTestnet:
-            addressLength = 64
-        }
-        
+        let addressLength = network.addressLength
         // OTP is always 64-bit
         return #"^addr:(0x[0-9a-fA-F]{\#(addressLength)})[\s\r\n]+otp:(0x[0-9a-fA-F]{64})$"#
     }
@@ -23,16 +14,7 @@ struct QRCodeParser {
     }
     
     static func getQRCodeFormatDescription(for network: NetworkConfig.NetworkType) -> String {
-        let addressLength: Int
-        switch network {
-        case .celoSepolia:
-            addressLength = 40
-        case .ethSepolia:
-            addressLength = 40
-        case .aptosTestnet:
-            addressLength = 64
-        }
-        
+        let addressLength = network.addressLength
         return "Expected QR code format for \(network.displayName):\naddr:0x[\(addressLength)-digit hex]\n[whitespace or newline]\notp:0x[64-digit hex]"
     }
     
