@@ -1,0 +1,54 @@
+# Swift & Xcode .gitignore
+# Build generated
+build/
+DerivedData/
+
+# Xcode
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+*.xcscmblueprint
+
+# Swift Package Manager
+/.build
+/Packages
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Archives
+*.xcarchive
+
+# Playground
+timeline.xctimeline
+playground.xcworkspace
+
+# AppCode
+.idea/
+*.iml
+
+# User-specific
+*.swp
+*.swo
+*.tmp
+*.DS_Store
+
+# Other
+*.moved-aside
+*.xcuserstate
+
+# SwiftPM binary artifacts
+.artifacts/

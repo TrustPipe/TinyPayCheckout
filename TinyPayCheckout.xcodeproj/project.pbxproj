@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		F24CFA1C2E7BFF35006D9D61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F24CFA062E7BFF33006D9D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F24CFA0D2E7BFF33006D9D61;
+			remoteInfo = TinyPayCheckout;
+		};
+		F24CFA262E7BFF35006D9D61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F24CFA062E7BFF33006D9D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F24CFA0D2E7BFF33006D9D61;
+			remoteInfo = TinyPayCheckout;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F24CFA0E2E7BFF33006D9D61 /* TinyPayCheckout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyPayCheckout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F24CFA1B2E7BFF35006D9D61 /* TinyPayCheckoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyPayCheckoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F24CFA252E7BFF35006D9D61 /* TinyPayCheckoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyPayCheckoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F24CFA5A2E7C16F1006D9D61 /* Exceptions for "TinyPayCheckout" folder in "TinyPayCheckout" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F24CFA0D2E7BFF33006D9D61 /* TinyPayCheckout */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F24CFA102E7BFF33006D9D61 /* TinyPayCheckout */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F24CFA5A2E7C16F1006D9D61 /* Exceptions for "TinyPayCheckout" folder in "TinyPayCheckout" target */,
+			);
+			path = TinyPayCheckout;
+			sourceTree = "<group>";
+		};
+		F24CFA1E2E7BFF35006D9D61 /* TinyPayCheckoutTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TinyPayCheckoutTests;
+			sourceTree = "<group>";
+		};
+		F24CFA282E7BFF35006D9D61 /* TinyPayCheckoutUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TinyPayCheckoutUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F24CFA0B2E7BFF33006D9D61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F24CFA182E7BFF35006D9D61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F24CFA222E7BFF35006D9D61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F24CFA052E7BFF33006D9D61 = {
+			isa = PBXGroup;
+			children = (
+				F24CFA102E7BFF33006D9D61 /* TinyPayCheckout */,
+				F24CFA1E2E7BFF35006D9D61 /* TinyPayCheckoutTests */,
+				F24CFA282E7BFF35006D9D61 /* TinyPayCheckoutUITests */,
+				F24CFA0F2E7BFF33006D9D61 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F24CFA0F2E7BFF33006D9D61 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F24CFA0E2E7BFF33006D9D61 /* TinyPayCheckout.app */,
+				F24CFA1B2E7BFF35006D9D61 /* TinyPayCheckoutTests.xctest */,
+				F24CFA252E7BFF35006D9D61 /* TinyPayCheckoutUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F24CFA0D2E7BFF33006D9D61 /* TinyPayCheckout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F24CFA2F2E7BFF35006D9D61 /* Build configuration list for PBXNativeTarget "TinyPayCheckout" */;
+			buildPhases = (
+				F24CFA0A2E7BFF33006D9D61 /* Sources */,
+				F24CFA0B2E7BFF33006D9D61 /* Frameworks */,
+				F24CFA0C2E7BFF33006D9D61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F24CFA102E7BFF33006D9D61 /* TinyPayCheckout */,
+			);
+			name = TinyPayCheckout;
+			packageProductDependencies = (
+			);
+			productName = TinyPayCheckout;
+			productReference = F24CFA0E2E7BFF33006D9D61 /* TinyPayCheckout.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F24CFA1A2E7BFF35006D9D61 /* TinyPayCheckoutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F24CFA322E7BFF35006D9D61 /* Build configuration list for PBXNativeTarget "TinyPayCheckoutTests" */;
+			buildPhases = (
+				F24CFA172E7BFF35006D9D61 /* Sources */,
+				F24CFA182E7BFF35006D9D61 /* Frameworks */,
+				F24CFA192E7BFF35006D9D61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F24CFA1D2E7BFF35006D9D61 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F24CFA1E2E7BFF35006D9D61 /* TinyPayCheckoutTests */,
+			);
+			name = TinyPayCheckoutTests;
+			packageProductDependencies = (
+			);
+			productName = TinyPayCheckoutTests;
+			productReference = F24CFA1B2E7BFF35006D9D61 /* TinyPayCheckoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F24CFA242E7BFF35006D9D61 /* TinyPayCheckoutUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F24CFA352E7BFF35006D9D61 /* Build configuration list for PBXNativeTarget "TinyPayCheckoutUITests" */;
+			buildPhases = (
+				F24CFA212E7BFF35006D9D61 /* Sources */,
+				F24CFA222E7BFF35006D9D61 /* Frameworks */,
+				F24CFA232E7BFF35006D9D61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F24CFA272E7BFF35006D9D61 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F24CFA282E7BFF35006D9D61 /* TinyPayCheckoutUITests */,
+			);
+			name = TinyPayCheckoutUITests;
+			packageProductDependencies = (
+			);
+			productName = TinyPayCheckoutUITests;
+			productReference = F24CFA252E7BFF35006D9D61 /* TinyPayCheckoutUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F24CFA062E7BFF33006D9D61 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					F24CFA0D2E7BFF33006D9D61 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					F24CFA1A2E7BFF35006D9D61 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = F24CFA0D2E7BFF33006D9D61;
+					};
+					F24CFA242E7BFF35006D9D61 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = F24CFA0D2E7BFF33006D9D61;
+					};
+				};
+			};
+			buildConfigurationList = F24CFA092E7BFF33006D9D61 /* Build configuration list for PBXProject "TinyPayCheckout" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F24CFA052E7BFF33006D9D61;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F24CFA0F2E7BFF33006D9D61 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F24CFA0D2E7BFF33006D9D61 /* TinyPayCheckout */,
+				F24CFA1A2E7BFF35006D9D61 /* TinyPayCheckoutTests */,
+				F24CFA242E7BFF35006D9D61 /* TinyPayCheckoutUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F24CFA0C2E7BFF33006D9D61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F24CFA192E7BFF35006D9D61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F24CFA232E7BFF35006D9D61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F24CFA0A2E7BFF33006D9D61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F24CFA172E7BFF35006D9D61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F24CFA212E7BFF35006D9D61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F24CFA1D2E7BFF35006D9D61 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F24CFA0D2E7BFF33006D9D61 /* TinyPayCheckout */;
+			targetProxy = F24CFA1C2E7BFF35006D9D61 /* PBXContainerItemProxy */;
+		};
+		F24CFA272E7BFF35006D9D61 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F24CFA0D2E7BFF33006D9D61 /* TinyPayCheckout */;
+			targetProxy = F24CFA262E7BFF35006D9D61 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F24CFA2D2E7BFF35006D9D61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F24CFA2E2E7BFF35006D9D61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F24CFA302E7BFF35006D9D61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TinyPayCheckout/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use for scan QR Code";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TrustPipe.TinyPay.Checkout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F24CFA312E7BFF35006D9D61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TinyPayCheckout/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use for scan QR Code";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TrustPipe.TinyPay.Checkout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		F24CFA332E7BFF35006D9D61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TrustPipe.TinyPay.Checkout.TinyPayCheckoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinyPayCheckout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TinyPayCheckout";
+			};
+			name = Debug;
+		};
+		F24CFA342E7BFF35006D9D61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TrustPipe.TinyPay.Checkout.TinyPayCheckoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinyPayCheckout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TinyPayCheckout";
+			};
+			name = Release;
+		};
+		F24CFA362E7BFF35006D9D61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TrustPipe.TinyPay.Checkout.TinyPayCheckoutUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TinyPayCheckout;
+			};
+			name = Debug;
+		};
+		F24CFA372E7BFF35006D9D61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UD3269PSCB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TrustPipe.TinyPay.Checkout.TinyPayCheckoutUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TinyPayCheckout;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F24CFA092E7BFF33006D9D61 /* Build configuration list for PBXProject "TinyPayCheckout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F24CFA2D2E7BFF35006D9D61 /* Debug */,
+				F24CFA2E2E7BFF35006D9D61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F24CFA2F2E7BFF35006D9D61 /* Build configuration list for PBXNativeTarget "TinyPayCheckout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F24CFA302E7BFF35006D9D61 /* Debug */,
+				F24CFA312E7BFF35006D9D61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F24CFA322E7BFF35006D9D61 /* Build configuration list for PBXNativeTarget "TinyPayCheckoutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F24CFA332E7BFF35006D9D61 /* Debug */,
+				F24CFA342E7BFF35006D9D61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F24CFA352E7BFF35006D9D61 /* Build configuration list for PBXNativeTarget "TinyPayCheckoutUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F24CFA362E7BFF35006D9D61 /* Debug */,
+				F24CFA372E7BFF35006D9D61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F24CFA062E7BFF33006D9D61 /* Project object */;
+}
